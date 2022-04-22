@@ -1,0 +1,215 @@
+# *******************************************************************
+# INDEPENDENT DEFINITIONS PATHS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  validityModel:
+    type: object
+    required:
+      - id
+      - code
+      - rankNumberFrom
+      - rankNumberTo
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      rankNumberFrom:
+        type: string
+      rankNumberTo:
+        type: string
+  # ***************************
+  majorComponentAssemblyModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  # ***************************
+  environmentsTypeModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  # ***************************
+  routeCategoryModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      essential:
+        type: boolean
+      system:
+        type: number
+      systemDescription:
+        type: string
+      categoryCode:
+        type: string
+      categoryDescription:
+        type: string
+      remarks:
+        type: string
+  # ***************************
+  branch3dSegmentModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  # ***************************
+  branch3dExtremityTypeModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  # ***************************
+  branchPointDefinitionModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      branchCoordinateX:
+        type: number
+      branchCoordinateY:
+        type: number
+      branchCoordinateZ:
+        type: number
+      branchVectorX:
+        type: number
+      branchVectorY:
+        type: number
+      branchVectorZ:
+        type: number
+      middle:
+        type: boolean
+  # ***************************
+  branchManufExtremityModel:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      usableFor:
+        type: string
+  # ***************************
+  mechanicalBackshellComponentModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      material:
+        type: string
+      emi:
+        type: string
+      backshellType:
+        type: string
+  # ***************************
+  mechanicalCoveringElementComponentModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      bendRadiusMinD:
+        type: integer
+      colour:
+        type: string
+      comment:
+        type: string
+      commentTresti:
+        type: string
+      diameterMaxMm:
+        type: integer
+      diameterMaxMmTresti:
+        type: integer
+      diameterMinMm:
+        type: integer
+      diameterMinMmTresti:
+        type: integer
+      environement:
+        type: string
+      lengthMm:
+        type: integer
+      lengthMmTresti:
+        type: integer
+      material:
+        type: string
+      order:
+        type: string
+      orderTresti:
+        type: string
+      sizeCode:
+        type: string
+      sizeCodeTresti:
+        type: string
+      sleeveFamily:
+        type: string
+      temperatureMaxC:
+        type: integer
+      temperatureMinC:
+        type: integer
+      thicknessCoeffA:
+        type: string
+      thicknessCoeffATresti:
+        type: string
+      thicknessCoeffB:
+        type: string
+      thicknessCoeffBTresti:
+        type: string
+      weightG:
+        type: integer
+      weightGMTresti:
+        type: integer
+  # ***************************
+  coveringElementTypeModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+     
+  # ***************************
+  userAreaModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+   
+
+      

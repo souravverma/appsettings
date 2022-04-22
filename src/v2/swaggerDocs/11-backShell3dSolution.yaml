@@ -1,0 +1,194 @@
+# *******************************************************************
+# BACKSHELL 3D SOLUTION PATHS
+# *******************************************************************
+
+paths:
+  # *** backshell3dSolution
+  /api/v2/backshell3dSolution:
+    get:
+      tags:
+        - Backshell 3D Solution
+      summary: Return all Backshell3DSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of all data of a Backshell3DSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/backshell3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** backshell3dSolution/component
+  /api/v2/backshell3dSolution/component:
+    get:
+      tags:
+        - Backshell 3D Solution
+      summary: Return Backshell3DSolution with associate Component
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by Backshell3dSolutionModel - serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of Backshell3dSolutionModel with associated Component
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/backshell3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            component:
+                              type: array
+                              items:
+                                $ref: "#/definitions/componentModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** backshell3dSolution/functionalItem3dSolution
+  /api/v2/backshell3dSolution/functionalItem3dSolution:
+    get:
+      tags:
+        - Backshell 3D Solution
+      summary: Return Backshell3DSolution with associate FunctionalItem
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by Backshell3dSolutionModel - serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of Backshell3dSolutionModel with associated functionalItem
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/backshell3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItemModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+
+# *******************************************************************
+# BACKSHELL 3D SOLUTION DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newBackshell3dSolutionModel:
+    type: object
+    properties:
+      backshellOrientation:
+        type: string
+      backshellOrientationReference:
+        type: string
+      positionX:
+        type: integer
+      positionY:
+        type: integer
+      positionZ:
+        type: integer
+      type:
+        type: string
+      part_number_3d:
+        type: string
+  # ***************************
+  backshell3dSolutionModel:
+    allOf:
+      - $ref: "#/definitions/newBackshell3dSolutionModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

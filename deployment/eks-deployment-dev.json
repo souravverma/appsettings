@@ -1,0 +1,67 @@
+{
+    "name": "ce-api-harness",
+    "version": "1.0.${BUILD_NUMBER}",
+    "servicePort": 3000,
+    "dockerImage": "1t21-ce-api-harness:${IMAGE_TAG}",
+    "sslCertificateActive": "false",
+    "dnsRelativePath": "/harness",
+    "replicas": 4,
+    "labels": {
+        "technology": "nodejs",
+        "owner": "ElecForce"
+    },
+    "limits": {
+        "cpu": "3",
+        "memory": "3Gi"
+    },
+    "requests": {
+        "cpu": "500m",
+        "memory": "1Gi"
+    },
+    "liveness": {
+        "probePath" : "/harness/api/v2/status",
+        "initialDelaySecs": 3,
+        "initialPeriodSecs": 3
+    },
+    "env_vars" : [
+        {
+            "name" : "PORT", 
+            "value" : "3000"
+        },
+        {
+            "name" : "MS_NAME", 
+            "value" : "ce-api-harness"
+        },
+        {
+            "name" : "NEED_SEEDS", 
+            "value" : "false"
+        },
+        {
+            "name" : "DB_SCHEMAV2", 
+            "value" : "coreelec"
+        },
+        {
+            "name" : "DB_SCHEMAV1", 
+            "value" : "playground_nis_harness"
+        },
+        {
+            "name" : "EKS",
+            "value" : "true"
+        }
+    ],
+    "mounts": {
+        "env": {
+            "global_secrets" : [
+                "db-connection-cred",
+                "mobilesso-cred"
+            ],
+            "global_shared_secrets" : [
+                "ce-auth-jwt-public-key"
+            ],
+            "global_configs" : [
+                "db-connection-coreelec",
+                "authentication"
+            ]
+        }
+    } 
+}

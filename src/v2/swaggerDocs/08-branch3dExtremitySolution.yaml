@@ -1,0 +1,385 @@
+# *******************************************************************
+# BRANCH 3D EXTREMITY SOLUTION PATHS
+# *******************************************************************
+
+paths:
+  # *** branch3dExtremitySolution
+  /api/v2/branch3dExtremitySolution:
+    get:
+      tags:
+        - Branch 3d Extremity Solution
+      summary: Return all branch3dExtremitySolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of all data of a branch3dExtremitySolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/branch3dExtremitySolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3dExtremitySolution/branchManufExtremity
+  /api/v2/branch3dExtremitySolution/branchManufExtremity:
+    get:
+      tags:
+        - Branch 3d Extremity Solution
+      summary: Return branch3dExtremitySolution with associate branchManufExtremity
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of branch3dExtremitySolution with associated branchManufExtremity
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dExtremitySolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branchManufExtremity:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branchManufExtremityModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3dExtremitySolution/branch3dExtremityType
+  /api/v2/branch3dExtremitySolution/branch3dExtremityType:
+    get:
+      tags:
+        - Branch 3d Extremity Solution
+      summary: Return branch3dExtremitySolution with associate branch3dExtremityType
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of branch3dExtremitySolution with associated branch3dExtremityType
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dExtremitySolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3dExtremityType:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dExtremityTypeModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3dExtremitySolution/coveringElement3d
+  /api/v2/branch3dExtremitySolution/coveringElement3d:
+    get:
+      tags:
+        - Branch 3d Extremity Solution
+      summary: Return branch3dExtremitySolution with associate coveringElement3d
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of branch3dExtremitySolution with associated coveringElement3d
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dExtremitySolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            coveringElement3d:
+                              type: array
+                              items:
+                                $ref: "#/definitions/coveringElement3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3dExtremitySolution/functionalItem3dSolution
+  /api/v2/branch3dExtremitySolution/functionalItem3dSolution:
+    get:
+      tags:
+        - Branch 3d Extremity Solution
+      summary: Return branch3dExtremitySolution with associate functionalItem3dSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of branch3dExtremitySolution with associated functionalItem3dSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dExtremitySolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem3dSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItem3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3dExtremitySolution/branch3d
+  /api/v2/branch3dExtremitySolution/branch3d:
+    get:
+      tags:
+        - Branch 3d Extremity Solution
+      summary: Return branch3dExtremitySolution with associate branch3d
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of branch3dExtremitySolution with associated branch3d
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dExtremitySolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3d:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+
+# *******************************************************************
+# DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newBranch3dExtremitySolutionModel:
+    type: object
+    required:
+      - name
+      - electricalCoordinateX
+      - electricalCoordinateY
+      - electricalCoordinateZ
+    properties:
+      name:
+        type: string
+      electricalCoordinateX:
+        type: number
+      electricalCoordinateY:
+        type: number
+      electricalCoordinateZ:
+        type: number
+  # ***************************
+  branch3dExtremitySolutionModel:
+    allOf:
+      - $ref: "#/definitions/newBranch3dExtremitySolutionModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

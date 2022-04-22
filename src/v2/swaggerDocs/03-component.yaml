@@ -1,0 +1,319 @@
+# *******************************************************************
+# COMPONENT PATHS
+# *******************************************************************
+
+paths:
+  # *** component
+  /api/v2/component:
+    get:
+      tags:
+        - Component
+      summary: Return all Component
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: partNumber
+          description: Filter by partNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of all data of a Component
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/componentModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** component/backshells
+  /api/v2/component/backshells:
+    get:
+      tags:
+        - Component
+      summary: Return Component with Backshell3D Solution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by Component - serial id
+          in: query
+          required: false
+          type: integer
+        - name: partNumber
+          description: Filter by partNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of Component with Backshell3D Solution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/componentModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            backshell3DSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/backshell3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"    
+  
+  # *** component/mechanicalBackshellComponent
+  /api/v2/component/mechanicalBackshellComponent:
+    get:
+      tags:
+        - Component
+      summary: Return Component with Mechanical Backshell Component
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by Component - serial id
+          in: query
+          required: false
+          type: integer
+        - name: partNumber
+          description: Filter by partNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of Component with Mechanical Backshell Component
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/componentModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            backshell3DSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/mechanicalBackshellComponentModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** component/mechanicalCoveringElementComponent
+  /api/v2/component/mechanicalCoveringElementComponent:
+    get:
+      tags:
+        - Component
+      summary: Return Component with Mechanical CoveringElement Component
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by Component - serial id
+          in: query
+          required: false
+          type: integer
+        - name: partNumber
+          description: Filter by partNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of Component with Mechanical CoveringElement Component
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/componentModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            coveringElement:
+                              type: array
+                              items:
+                                $ref: "#/definitions/mechanicalCoveringElementComponentModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** component/coveringElement
+  /api/v2/component/coveringElement:
+    get:
+      tags:
+        - Component
+      summary: Return Component with CoveringElement
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by Component - serial id
+          in: query
+          required: false
+          type: integer
+        - name: partNumber
+          description: Filter by partNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of Component with CoveringElement
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/componentModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            coveringElement:
+                              type: array
+                              items:
+                                $ref: "#/definitions/coveringElement3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+ 
+
+# *******************************************************************
+# Component DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newComponentModel:
+    type: object
+    required:
+      - partNumber
+    properties:
+      partNumber:
+        type: string
+      norm:
+        type: string
+  # ***************************
+  componentModel:
+    allOf:
+      - $ref: "#/definitions/newComponentModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # *************************** 

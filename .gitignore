@@ -1,0 +1,15 @@
+.idea
+.tscache
+.vs
+*.log
+*.tmp.txt
+node_modules
+dist/
+doc/
+.env
+example.json
+Dec&Lon/
+uploads/
+src/finalSqlScriptV2.sql
+example.txt
+coverage

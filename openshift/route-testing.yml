@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ce-api-harness-testing
+  namespace: 1t21-d
+spec:
+  host: ce-api-harness-testing-1t21-d.epaas.eu.airbus.corp
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: ce-api-harness-testing
+    weight: 100
+  wildcardPolicy: None

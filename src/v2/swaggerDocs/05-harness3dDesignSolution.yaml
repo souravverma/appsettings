@@ -1,0 +1,830 @@
+# *******************************************************************
+# Harness 3d Design Solution PATHS
+# *******************************************************************
+
+paths:
+  # *** harness3dDesignSolution
+  /api/v2/harness3dDesignSolution:
+    get:
+      tags:
+        - Harness 3d Design Solution
+      summary: Return all Harness 3d Design Solution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: adapDesignSolutionNumber
+          description: Filter by adapDesignSolutionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          description: Filter by adapDesignSolutionVersionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionIssueNumber
+          description: Filter by adapDesignSolutionIssueNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsNumber
+          description: Filter by caccDsNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsSolution
+          description: Filter by caccDsSolution
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: consolidationStatus
+          description: >
+            Filter by consolidationStatus:
+             * `KO`
+             * `WARNING`
+             * `ERROR`
+             * `SUCCESS`
+             * `OK`
+          in: query
+          required: false
+          type: string
+          enum: [KO, WARNING, ERROR, SUCCESS, OK]
+      responses:
+        200:
+          description: Success, Return an array of all data of a harness3dDesignSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/harness3dDesignSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+    head:
+      tags:
+        - Harness 3d Design Solution
+      summary: 'Check if a Harness 3d design solution exist'
+      parameters:
+        - name: adapDesignSolutionNumber
+          in: query
+          description: 'Filter Harness 3d design solution on adapDesignSolutionNumber'
+          required: true
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          in: query
+          description: 'Filter Harness 3d design solution on adapDesignSolutionVersionNumber'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Existing'
+        '404':
+          description: 'Not found'
+
+          
+   # *** harness3dDesignSolutions/{id}
+  /api/v2/harness3dDesignSolution/{adapDesignSolutionNumber}/{version}/routingInfo:
+    get:
+      tags:
+        - Harness 3d Design Solution routing info
+      summary: 'Routing Info '
+      parameters:
+        - name: adapDesignSolutionNumber
+          in: path
+          description: 'Filter Harness 3d Design Solutions on adapDesignSolutionNumber'
+          required: true
+          type: string
+        - name: version
+          in: path
+          description: 'Filter Harness3DDesignSolutions on adapDesignSolutionVersionNumber'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Ok'
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:              
+                  $ref: "#/definitions/harness3dDesignSolutionModel"
+        '404':
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'           
+    # put:
+    #   tags:
+    #     - Harness 3d Design Solution
+    #   summary: 'Update a specific harness design solution '
+    #   parameters:
+    #     - name: id
+    #       in: path
+    #       description: 'Filter Harness 3d Design Solutions on id'
+    #       required: true
+    #       schema:
+    #         type: integer
+    #   requestBody:
+    #     content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/definitions/harness3dDesignSolution'
+    #   responses:
+    #     '204':
+    #       description: 'resource updated successfully'
+    #     '404':
+    #       description: 'Not found'
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/definitions/errorModel'
+             
+  
+  # *** harness3dDesignSolutions/{id}
+  /api/v2/harness3dDesignSolution/{adapDesignSolutionNumber}:
+    get:
+      tags:
+        - Harness 3d Design Solution
+      summary: 'Get a specific harness design solution '
+      parameters:
+        - name: adapDesignSolutionNumber
+          in: path
+          description: 'Filter Harness 3d Design Solutions on adapDesignSolutionNumber'
+          required: true
+          type: string
+        - name: version
+          in: query
+          description: 'Filter Harness3DDesignSolutions on adapDesignSolutionVersionNumber'
+          required: false
+          type: string
+        - name: issue
+          in: query
+          description: 'Filter Harness3DDesignSolutions on adapDesignSolutionIssueNumber'
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 'Ok'
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:              
+                  $ref: "#/definitions/harness3dDesignSolutionModel"
+        '404':
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'           
+    # put:
+    #   tags:
+    #     - Harness 3d Design Solution
+    #   summary: 'Update a specific harness design solution '
+    #   parameters:
+    #     - name: id
+    #       in: path
+    #       description: 'Filter Harness 3d Design Solutions on id'
+    #       required: true
+    #       schema:
+    #         type: integer
+    #   requestBody:
+    #     content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/definitions/harness3dDesignSolution'
+    #   responses:
+    #     '204':
+    #       description: 'resource updated successfully'
+    #     '404':
+    #       description: 'Not found'
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/definitions/errorModel'
+              
+  /api/v2/harness3dDesignSolution/{adapDesignSolutionNumber}/hasPartZoneOn/{UserAreaName}:
+    head:
+      tags:
+        - Harness 3d Design Solution
+      summary: Return 200 if an harness has partzone on a given Usea Area. Else return 404.
+      parameters:
+        - in: path
+          name: adapDesignSolutionNumber
+          type: string
+          required: true
+        - in: path
+          name: UserAreaName
+          type: string
+          required: true
+      responses:
+        responses:
+        '200':
+          description: 'Existing'
+        '404':
+          description: 'Not found'
+  # *** harness3dDesignSolution/functionalItem
+  /api/v2/harness3dDesignSolution/functionalItem:
+    get:
+      tags:
+        - Harness 3d Design Solution
+      summary: Return harness3dDesignSolution with associate functionalItem
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: adapDesignSolutionNumber
+          description: Filter by adapDesignSolutionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          description: Filter by adapDesignSolutionVersionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionIssueNumber
+          description: Filter by adapDesignSolutionIssueNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsNumber
+          description: Filter by caccDsNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsSolution
+          description: Filter by caccDsSolution
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        200:
+          description: Success, Return an array of harness3dDesignSolution with associated functionalItem
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/harness3dDesignSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItemModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** harness3dDesignSolution/deliverableAssemblySolution
+  /api/v2/harness3dDesignSolution/deliverableAssemblySolution:
+    get:
+      tags:
+        - Harness 3d Design Solution
+      summary: Return harness3dDesignSolution with associate deliverableAssemblySolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: adapDesignSolutionNumber
+          description: Filter by adapDesignSolutionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          description: Filter by adapDesignSolutionVersionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionIssueNumber
+          description: Filter by adapDesignSolutionIssueNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsNumber
+          description: Filter by caccDsNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsSolution
+          description: Filter by caccDsSolution
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        200:
+          description: Success, Return an array of harness3dDesignSolution with associated deliverableAssemblySolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/harness3dDesignSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            deliverableAssemblySolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/deliverableAssemblySolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** harness3dDesignSolution/majorComponentAssembly
+  /api/v2/harness3dDesignSolution/majorComponentAssembly:
+    get:
+      tags:
+        - Harness 3d Design Solution
+      summary: Return harness3dDesignSolution with associate majorComponentAssembly
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: adapDesignSolutionNumber
+          description: Filter by adapDesignSolutionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          description: Filter by adapDesignSolutionVersionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionIssueNumber
+          description: Filter by adapDesignSolutionIssueNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsNumber
+          description: Filter by caccDsNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsSolution
+          description: Filter by caccDsSolution
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        200:
+          description: Success, Return an array of harness3dDesignSolution with associated majorComponentAssembly
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/harness3dDesignSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            majorComponentAssembly:
+                              type: array
+                              items:
+                                $ref: "#/definitions/majorComponentAssemblyModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** harness3dDesignSolution/partZone
+  /api/v2/harness3dDesignSolution/partZone:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Harness 3d Design Solution
+      summary: Return harness3dDesignSolution with associate partZone
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: adapDesignSolutionNumber
+          description: Filter by adapDesignSolutionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          description: Filter by adapDesignSolutionVersionNumber
+          in: query
+          required: false
+          type: string
+        - name: adapDesignSolutionIssueNumber
+          description: Filter by adapDesignSolutionIssueNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsNumber
+          description: Filter by caccDsNumber
+          in: query
+          required: false
+          type: string
+        - name: caccDsSolution
+          description: Filter by caccDsSolution
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        200:
+          description: Success, Return an array of harness3dDesignSolution with associated partZone
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/harness3dDesignSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            partZone:
+                              type: array
+                              items:
+                                $ref: "#/definitions/partZoneModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Harness 3d Design Solution
+      summary: Create a new harness3dDesignSolution with associate partZones
+      parameters:
+        - in: body
+          name: harness
+          description: Definition of the harness including related partzones
+          schema:
+            type: object
+            properties:
+              harness3dDesignSolution:
+                $ref: '#/definitions/harness3dDesignSolutionModel'
+              functionalItem:
+                  $ref: '#/definitions/functionalItemModel'
+              partZone:
+                type: array
+                items:
+                  $ref: '#/definitions/partZoneModel'
+              partzoneList:
+                type: array
+                items:
+                  type: string    
+            example:
+              harness3dDesignSolution:
+                adapDesignSolutionNumber: D9292199900000
+              functionalItem:
+                sequenceNumber: 3545
+                circuit: VB
+              partZone:
+                - name: D92921999000A1
+                  userArea: A1
+                - name: D92921999000A2
+                  userArea: A2
+                  originId: 1
+              partzoneList:
+                - 'D92921999000Q3'
+                - 'D92921999000S3'
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+
+  # *** harness3dDesignSolution/freezeDS
+  /api/v2/harness3dDesignSolution/freezeDS:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Harness 3d Design Solution
+      summary: Freeze a DS and its Partzones
+      parameters:
+        - in: body
+          name: harness
+          description: Definition of the harness including related partzones
+          schema:
+            type: object
+            properties:
+              adapDesignSolutionNumber:
+                type: string
+              adapDesignSolutionVersionNumber:
+                type: string
+              adapDesignSolutionIssueNumber:
+                type: string
+            example:
+              adapDesignSolutionNumber: "E9297854524000"
+              adapDesignSolutionVersionNumber: "001"
+              adapDesignSolutionIssueNumber: "A"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: 
+                type: object
+                items: 
+                  result:
+                    type: array
+                    items:
+                      type: string
+
+
+# *** harness3dDesignSolution/APSData
+  /api/v2/harness3dDesignSolution/APSData:
+    get:
+      tags:
+        - Harness 3d Design Solution
+      summary: Get data from APS Platform
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: adapDesignSolutionNumber
+          in: query
+          required: true
+          type: string
+        - name: program
+          description: Filter by Program
+          in: query
+          required: true
+          type: string
+        - name: source
+          description: Filter by source
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: 
+                type: object
+                items: 
+                  result:
+                    type: array
+                    items:
+                      type: string
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+# *** harness3dDesignSolution/CapitalXML
+  /api/v2/harness3dDesignSolution/CapitalXMLAPI/{adapDesignSolutionNumber}?include_non_extractible=false&suppress_small_br=false:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Harness 3d Design Solution
+      summary: Return Capital XML for harness3dDesignSolution by filtering small,non-extractible branches and partZones
+      produces:
+        - application/xml
+      parameters:
+         - in: path
+           name: adapDesignSolutionNumber
+           type: string
+           required: true
+         - in: query
+           name: include_non_extractible
+           type: boolean
+           required: true
+         - in: query
+           name: suppress_small_br
+           type: boolean
+           required: true
+         - in: body
+           name: Filter by partZones
+           description: Enter list of partZones & adapDSversion(fill it as empty if you want to extract all partZones info while generating CapitalXML)
+           schema:
+            type: object
+            properties:
+              adapDSVersion:
+                type:string
+              partzoneList:
+                type: array
+                items:
+                  type: string
+            example:
+              adapDSVersion: '002'
+              partzoneList:
+                - 'E92977540000R3'
+                - 'E92977540000R1'  
+      responses:
+        200:
+          description: Success, Return a xml of harness3dDesignSolution with capital format
+          schema:
+            type: object
+            items:
+              - type: string
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+# *******************************************************************
+# DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newHarness3dDesignSolutionModel:
+    type: object
+    required:
+      - caccDsSolution
+    properties:
+      adapDesignSolutionNumber:
+        type: string
+      adapDsVersion:
+        type: string
+      adapDsOwner:
+        type: string
+      modificationAdapDsDate:
+        type: string
+      extractionOwner:
+        type: string
+      extractionDateFrom3d:
+        type: string
+      storingOwnerInCoreElec:
+        type: string
+      storingDateInCoreElec:
+        type: string
+      caccDsNumber:
+        type: string
+      caccDsSolution:
+        type: string
+      consolidationStatus:
+        type: string
+        enum: [KO, WARNING, ERROR, SUCCESS]
+      consolidationMsg:
+        type: string
+  # ***************************
+  harness3dDesignSolutionModel:
+    allOf:
+      - $ref: "#/definitions/newHarness3dDesignSolutionModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************
+  deliverableAssemblySolutionModel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      deliverableAssemblySolution:
+        type: string
+      status:
+        type: string
+  # ***************************

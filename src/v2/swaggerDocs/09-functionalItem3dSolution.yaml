@@ -1,0 +1,456 @@
+# *******************************************************************
+# FUNCTIONAL ITEM 3D SOLUTION PATHS
+# *******************************************************************
+
+paths:
+  # *** functionalItem3dSolution
+  /api/v2/functionalItem3dSolution:
+    get:
+      tags:
+        - Functional Item 3d Solution
+      summary: Return all functional Item 3d Solution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: instanceName3d
+          description: Filter by instance Name 3d
+          in: query
+          required: false
+          type: string
+        - name: partNumber3d
+          description: Filter by partNumber3d
+          in: query
+          required: false
+          type: string
+        - name: longPartNumber
+          description: Filter by longPartNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of all data of a functionalItem3dSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/functionalItem3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem3dSolution/functionalItem
+  /api/v2/functionalItem3dSolution/functionalItem:
+    get:
+      tags:
+        - Functional Item 3d Solution
+      summary: Return functionalItem3dSolution with associate functionalItem
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: instanceName3d
+          description: Filter by instance Name 3d
+          in: query
+          required: false
+          type: string
+        - name: partNumber3d
+          description: Filter by partNumber3d
+          in: query
+          required: false
+          type: string
+        - name: longPartNumber
+          description: Filter by longPartNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem3dSolution with associated functionalItem
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItem3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItemModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem3dSolution/functionalItem3dSolution
+  /api/v2/functionalItem3dSolution/functionalItem3dSolution:
+    get:
+      tags:
+        - Functional Item 3d Solution
+      summary: Return functionalItem3dSolution with associate functionalItem3dSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: instanceName3d
+          description: Filter by instance Name 3d
+          in: query
+          required: false
+          type: string
+        - name: partNumber3d
+          description: Filter by partNumber3d
+          in: query
+          required: false
+          type: string
+        - name: longPartNumber
+          description: Filter by longPartNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem3dSolution with associated functionalItem3dSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItem3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem3dSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItem3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem3dSolution/partZone
+  /api/v2/functionalItem3dSolution/partZone:
+    get:
+      tags:
+        - Functional Item 3d Solution
+      summary: Return functionalItem3dSolution with associate partZone
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: instanceName3d
+          description: Filter by instance Name 3d
+          in: query
+          required: false
+          type: string
+        - name: partNumber3d
+          description: Filter by partNumber3d
+          in: query
+          required: false
+          type: string
+        - name: longPartNumber
+          description: Filter by longPartNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem3dSolution with associated partZone
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItem3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            partZone:
+                              type: array
+                              items:
+                                $ref: "#/definitions/partZoneModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem3dSolution/branch3dExtremitySolution
+  /api/v2/functionalItem3dSolution/branch3dExtremitySolution:
+    get:
+      tags:
+        - Functional Item 3d Solution
+      summary: Return functionalItem3dSolution with associate branch3dExtremitySolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: instanceName3d
+          description: Filter by instance Name 3d
+          in: query
+          required: false
+          type: string
+        - name: partNumber3d
+          description: Filter by partNumber3d
+          in: query
+          required: false
+          type: string
+        - name: longPartNumber
+          description: Filter by longPartNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem3dSolution with associated branch3dExtremitySolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItem3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3dExtremitySolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dExtremitySolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem3dSolution/backshell3dSolution
+  /api/v2/functionalItem3dSolution/backshell3dSolution:
+    get:
+      tags:
+        - Functional Item 3d Solution
+      summary: Return functionalItem3dSolution with associate backshell3dSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: instanceName3d
+          description: Filter by instance Name 3d
+          in: query
+          required: false
+          type: string
+        - name: partNumber3d
+          description: Filter by partNumber3d
+          in: query
+          required: false
+          type: string
+        - name: longPartNumber
+          description: Filter by longPartNumber
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem3dSolution with associated backshell3dSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItem3dSolutionModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            backshell3dSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/backshell3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+
+# *******************************************************************
+# DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newFunctionalItem3dSolutionModel:
+    type: object
+    required:
+      - partNumber3d
+    properties:
+      solutionNumber:
+        type: string
+      partNumber3d:
+        type: string
+      instanceName3d:
+        type: string
+      definitionZone:
+        type: string
+      panel:
+        type: string
+      longPartNumber:
+        type: string
+      mountingPriority:
+        type: string
+      masterSourceId:
+        type: string
+      positionX:
+        type: string
+      positionY:
+        type: string
+      positionZ:
+        type: string
+  # ***************************
+  functionalItem3dSolutionModel:
+    allOf:
+      - $ref: "#/definitions/newFunctionalItem3dSolutionModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

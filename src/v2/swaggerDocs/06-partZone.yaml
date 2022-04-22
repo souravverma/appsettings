@@ -1,0 +1,349 @@
+# *******************************************************************
+# PARTZONE PATHS
+# *******************************************************************
+
+paths:
+  # *** partZone
+  /api/v2/partZone:
+    get:
+      tags:
+        - Part Zone
+      summary: Return all partZone
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of all data of a partZone
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/partZoneModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+    head:
+      tags:
+        - Part Zone
+      summary: check if a partzone exist with a given name
+      produces:
+        - application/json
+      parameters:
+        - name: name
+          description: Filter by name
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: Existing
+        404:
+          description: Not found
+          
+  # *** partZone/userArea
+  /api/v2/partZone/userArea:
+    get:
+      tags:
+        - Part Zone
+      summary: Return partZone with associate userArea
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success, Return an array of partZone with associated userArea
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/partZoneModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            userArea:
+                              type: array
+                              items:
+                                $ref: "#/definitions/userAreaModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+  # *** partZone/branch3d
+  /api/v2/partZone/branch3d:
+    get:
+      tags:
+        - Part Zone
+      summary: Return partZone with associate branch3d
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of partZone with associated branch3d
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/partZoneModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3d:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** partZone/harness3dDesignSolution
+  /api/v2/partZone/harness3dDesignSolution:
+    get:
+      tags:
+        - Part Zone
+      summary: Return partZone with associate harness3dDesignSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of partZone with associated harness3dDesignSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/partZoneModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            harness3dDesignSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/harness3dDesignSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** partZone/functionalItem3dSolution
+  /api/v2/partZone/functionalItem3dSolution:
+    get:
+      tags:
+        - Part Zone
+      summary: Return partZone with associate functionalItem3dSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: name
+          description: Filter by name
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of partZone with associated functionalItem3dSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/partZoneModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem3dSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItem3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+     # *** partZone/all
+  /api/v2/partZone/all:
+    delete:
+      tags:
+        - Part Zone
+      summary: Delete all unlinked Partzones
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+      responses:
+        200:
+          description: Success,Return a success message on deletion of all unliked partzones
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  allOf: # Combines properties
+                    type: string
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+# *******************************************************************
+# DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newPartZoneModel:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+      partZoneVersion:
+        type: string
+      origin:
+        type: number
+  # ***************************
+  partZoneModel:
+    allOf:
+      - $ref: "#/definitions/newPartZoneModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

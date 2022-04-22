@@ -1,0 +1,232 @@
+# ---------------------------------------------------------
+# PATHS
+# ---------------------------------------------------------
+paths:
+  # ---------------------------------------------------------
+  /api/v2/admin/delete/harnesses:  
+    post:     
+      security:
+        - Bearer: []
+      tags:
+        - Admin 
+      summary: Delete 3D Harnesses and every related element
+      produces:
+      - application/json
+      parameters:
+        - name: adapDesignSolutionNumber
+          description: Delete every element related to a given adapDesignSolutionNumber
+          in: query
+          required: true
+          type: string
+        - name: adapDesignSolutionVersionNumber
+          description: Delete every element related to a given adapDesignSolutionVersionNumber
+          in: query
+          required: true
+          type: string
+        - name: password
+          description: Password is needed for this operation
+          in: query
+          required: true
+          type: string
+      responses:
+         200:
+          description: Delete completed
+          type: string
+         404:
+           description: Error 404 Page Not found
+         401:
+           desciption: Unauthorized!
+  # ---------------------------------------------------------
+  /api/v2/admin/delete/PartZoneContent:
+    post: 
+      security:
+        - Bearer: []       
+      tags:
+        - Admin 
+      summary: Delete Partzone content 
+      produces:
+      - application/json
+      parameters:
+        - name: password
+          description: Password is needed for this operation
+          in: query
+          required: true
+          type: string
+        - in: body
+          name: partzoneList
+          description: Enter a list of Partzones or single artzone 
+          schema:
+            type: object
+            properties:
+              partzones:
+                type: array
+            example:
+              partzones: [
+                          {
+                                "name": "E92978548300R1",
+                                "version": "002"
+                          },
+                          {
+                                "name": "E92978548300A1",
+                                "version": "001" 
+                            },
+                          {
+                                "name": "E92978548300A2",
+                                "version": "001" 
+                            }
+                          ]
+      responses:
+         200:
+          description: Partzone content Deleteion completed
+          type: string
+         404:
+           description: Error 404 Page Not found
+         401:
+           desciption: Unauthorized!
+
+   # ---------------------------------------------------------
+
+  /api/v2/admin/unfreezeDS:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Admin
+      summary: Unfreeze a DS and its Partzones
+      parameters:
+        - in: body
+          name: harness
+          description: Definition of the harness including related partzones
+          schema:
+            type: object
+            properties:
+              adapDesignSolutionNumber:
+                type: string
+              adapDesignSolutionVersionNumber:
+                type: string
+              adapDesignSolutionIssueNumber:
+                type: string
+              password:
+                type:string
+            example:
+              adapDesignSolutionNumber: "E9297854524000"
+              adapDesignSolutionVersionNumber: "001"
+              adapDesignSolutionIssueNumber: "A"
+              password: 'xxxxxxxxxx'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  result:
+                    type: array
+                    items:
+                      type: string
+        '404':
+          description: Error 404 Page Not found
+        '401':
+          desciption: Unauthorized!
+  # ----------------------------------------------------------
+  /api/v2/admin/partZone:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Admin
+      summary: delete a partZone
+      produces:
+        - application/json
+      parameters:
+        - name: name
+          description: PZ name
+          in: query
+          required: true
+          type: string
+        - name: version
+          description: PZ version
+          in: query
+          required: false
+          type: string  
+      responses:
+        200:
+          description: Success,Return a success message on deletion of a partzone
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  allOf: # Combines properties
+                    type: string
+        '404':
+          description: Error 404 Page Not found
+        '401':
+          desciption: Unauthorized!
+
+# ----------------------------------------------------------
+  /api/v2/admin/PartzoneUpdateFor3Dand2DData:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Admin
+      summary: Update 3D 2D Partzone content
+      produces:
+        - application/json 
+      parameters:
+        - name: password
+          description: Password is needed for this operation
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: Success,Return a success message on db update
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  allOf: # Combines properties
+                    type: string
+        '404':
+          description: Error 404 Page Not found
+        '401':
+          desciption: Unauthorized!
+# ----------------------------------------------------------
+  /api/v2/admin/DSUpdateFor3Dand2DData:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Admin
+      summary: Update 3D 2D DS content
+      produces:
+        - application/json 
+      parameters:
+        - name: password
+          description: Password is needed for this operation
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: Success,Return a success message on db update
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  allOf: # Combines properties
+                    type: string
+        '404':
+          description: Error 404 Page Not found
+        '401':
+          desciption: Unauthorized!
+          
+          

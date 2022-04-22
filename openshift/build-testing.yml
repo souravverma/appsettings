@@ -1,0 +1,37 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: ce-api-harness-testing
+    template: template-nodejs
+  name: ce-api-harness-testing
+  namespace: 1t21-d
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'ce-api-harness-testing:dev'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: dev
+      uri: >-
+        https://@github.airbus.corp/Airbus/1t21-ce-api-harness.git
+    secrets:
+      - secret:
+          name: npmrc-artifactory-aws
+    sourceSecret:
+      name: airbusrootca
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'airbus-nodejs-12-rhel7:latest'
+        namespace: openshift
+    type: Source
+  triggers:
+    - type: ConfigChange

@@ -1,0 +1,377 @@
+# *******************************************************************
+# FONCTIONNAL ITEM PATHS
+# *******************************************************************
+
+paths:
+  # *** functionalItem
+  /api/v2/functionalItem:
+    get:
+      tags:
+        - Functional Item
+      summary: Return all functional Item
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: sequenceNumber
+          description: Filter by sequence number
+          in: query
+          required: false
+          type: string
+        - name: suffix
+          description: Filter by suffix
+          in: query
+          required: false
+          type: string
+        - name: appendedLetter
+          description: Filter by appended Letter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of all data of a functionalItem
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/functionalItemModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem/harness3dDesignSolution
+  /api/v2/functionalItem/harness3dDesignSolution:
+    get:
+      tags:
+        - Functional Item
+      summary: Return functionalItem associate harness3dDesignSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: fk_circuit_id
+          in: query
+          type: integer
+        - name: sequenceNumber
+          description: Filter by sequence number
+          in: query
+          required: false
+          type: string
+        - name: suffix
+          description: Filter by suffix
+          in: query
+          required: false
+          type: string
+        - name: appendedLetter
+          description: Filter by appended Letter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem with associated harness3dDesignSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItemModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            harness3dDesignSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/harness3dDesignSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem/functionalItem3dSolution
+  /api/v2/functionalItem/functionalItem3dSolution:
+    get:
+      tags:
+        - Functional Item
+      summary: Return functionalItem associate functionalItem3dSolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: sequenceNumber
+          description: Filter by sequence number
+          in: query
+          required: false
+          type: string
+        - name: suffix
+          description: Filter by suffix
+          in: query
+          required: false
+          type: string
+        - name: appendedLetter
+          description: Filter by appended Letter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem with associated functionalItem3dSolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItemModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            functionalItem3dSolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/functionalItem3dSolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem/circuit
+  /api/v2/functionalItem/circuit:
+    get:
+      tags:
+        - Functional Item
+      summary: Return functionalItem associate circuit
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: sequenceNumber
+          description: Filter by sequence number
+          in: query
+          required: false
+          type: string
+        - name: suffix
+          description: Filter by suffix
+          in: query
+          required: false
+          type: string
+        - name: appendedLetter
+          description: Filter by appended Letter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem with associated circuit
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItemModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            circuit:
+                              type: array
+                              items:
+                                $ref: "#/definitions/circuitModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** functionalItem/aircraftProgram
+  /api/v2/functionalItem/aircraftProgram:
+    get:
+      tags:
+        - Functional Item
+      summary: Return functionalItem associate aircraftProgram
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+        - name: sequenceNumber
+          description: Filter by sequence number
+          in: query
+          required: false
+          type: string
+        - name: suffix
+          description: Filter by suffix
+          in: query
+          required: false
+          type: string
+        - name: appendedLetter
+          description: Filter by appended Letter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success, Return an array of functionalItem with associated aircraftProgram
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/functionalItemModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            aircraftProgram:
+                              type: array
+                              items:
+                                $ref: "#/definitions/aircraftProgramModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+# *******************************************************************
+# FINDS DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newFunctionalItemModel:
+    type: object
+    required:
+      - sequenceNumber
+    properties:
+      sequenceNumber:
+        type: string
+      suffix:
+        type: string
+      appendedLetter:
+        type: string
+      supplementaryPart:
+        type: string
+      description:
+        type: string
+  # ***************************
+  functionalItemModel:
+    allOf:
+      - $ref: "#/definitions/newFunctionalItemModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

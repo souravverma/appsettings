@@ -1,0 +1,288 @@
+# *******************************************************************
+# COVERING ELEMENT 3D PATHS
+# *******************************************************************
+
+paths:
+  # *** coveringElement3d
+  /api/v2/coveringElement3d:
+    get:
+      tags:
+        - Covering Element 3D
+      summary: Return all CoveringElement3d
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of all data of a CoveringElement3d
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/coveringElement3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+  # *** coveringElement3d/branch3dExtremitySolution
+  /api/v2/coveringElement3d/branch3dExtremitySolution:
+    get:
+      tags:
+        - Covering Element 3D
+      summary: Return CoveringElement3d with associate Branch3DExtremitySolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by CoveringElement3dModel - serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of CoveringElement3dModel with associated Branch3DExtremitySolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/coveringElement3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3dExtremity:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dExtremitySolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** coveringElement3d/branch3d
+  /api/v2/coveringElement3d/branch3d:
+    get:
+      tags:
+        - Covering Element 3D
+      summary: Return CoveringElement3d with associate Branch3D
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by CoveringElement3dModel - serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of CoveringElement3dModel with associated Branch3D
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/coveringElement3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3d:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** coveringElement3d/coveringElementType
+  /api/v2/coveringElement3d/coveringElementType:
+    get:
+      tags:
+        - Covering Element 3D
+      summary: Return CoveringElement3d with associate CoveringElementType
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by CoveringElement3dModel - serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of CoveringElement3dModel with associated CoveringElementType
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/coveringElement3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            coveringElementType:
+                              type: array
+                              items:
+                                $ref: "#/definitions/coveringElementTypeModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** coveringElement3d/component
+  /api/v2/coveringElement3d/component:
+    get:
+      tags:
+        - Covering Element 3D
+      summary: Return coveringElement3d with associate Component
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by CoveringElement3dModel - serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of CoveringElement3dModel with associated Component
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/coveringElement3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            component:
+                              type: array
+                              items:
+                                $ref: "#/definitions/componentModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+# *******************************************************************
+# COVERINGELEMENT3D DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newCoveringElement3dModel:
+    type: object
+    properties:
+      name:
+        type: string
+  # ***************************
+  coveringElement3dModel:
+    allOf:
+      - $ref: "#/definitions/newCoveringElement3dModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

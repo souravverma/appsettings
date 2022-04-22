@@ -1,0 +1,470 @@
+# *******************************************************************
+# BRANCH 3D PATHS
+# *******************************************************************
+
+paths:
+  # *** branch3d
+  /api/v2/branch3d:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return all branch3d
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of all data of a branch3d
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/definitions/branch3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/partZone
+  /api/v2/branch3d/partZone:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate partZone
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated partZone
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            partZone:
+                              type: array
+                              items:
+                                $ref: "#/definitions/partZoneModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/environmentsType
+  /api/v2/branch3d/environmentsType:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate environmentsType
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated environmentsType
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            environmentsType:
+                              type: array
+                              items:
+                                $ref: "#/definitions/environmentsTypeModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/branch3dExtremitySolution
+  /api/v2/branch3d/branch3dExtremitySolution:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate branch3dExtremitySolution
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated branch3dExtremitySolution
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3dExtremitySolution:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dExtremitySolutionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/coveringElement3d
+  /api/v2/branch3d/coveringElement3d:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate coveringElement3d
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated coveringElement3d
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            coveringElement3d:
+                              type: array
+                              items:
+                                $ref: "#/definitions/coveringElement3dModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/routeCategory
+  /api/v2/branch3d/routeCategory:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate routeCategory
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated routeCategory
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            routeCategory:
+                              type: array
+                              items:
+                                $ref: "#/definitions/routeCategoryModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/branch3dSegment
+  /api/v2/branch3d/branch3dSegment:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate branch3dSegment
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated branch3dSegment
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branch3dSegment:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branch3dSegmentModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+  # *** branch3d/branchPointDefinition
+  /api/v2/branch3d/branchPointDefinition:
+    get:
+      tags:
+        - Branch 3D
+      summary: Return branch3d with associate branchPointDefinition
+      produces:
+        - application/json
+      parameters:
+        - name: pageLength
+          description: Limit the number of records of the result
+          in: query
+          required: false
+          type: integer
+          minimum: 1
+          default: 1
+        - name: startIndex
+          description: Start index for paging
+          in: query
+          required: false
+          type: integer
+          minimum: 0
+          default: 0
+        - name: id
+          description: Filter by serial id
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Success, Return an array of branch3d with associated branchPointDefinition
+          schema:
+            type: object
+            allOf:
+              - type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      allOf: # Combines properties
+                        - $ref: "#/definitions/branch3dModel"
+                        - type: object
+                          # all other properties
+                          properties:
+                            branchPointDefinition:
+                              type: array
+                              items:
+                                $ref: "#/definitions/branchPointDefinitionModel"
+              - $ref: "#/definitions/contextModel"
+        404:
+          description: Error
+          schema:
+            $ref: "#/definitions/Common404Definition"
+
+ 
+# *******************************************************************
+# DEFINITIONS
+# *******************************************************************
+
+definitions:
+  # ***************************
+  newBranch3dModel:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+      branchId:
+        type: string
+      segments3dId:
+        type: string
+      diameter3dMm:
+        type: number
+      bendRadius:
+        type: number
+      lengthMm:
+        type: number
+      lengthForcedMm:
+        type: number
+      extraLengthMm:
+        type: number
+      notExtractible:
+        type: boolean
+  # ***************************
+  branch3dModel:
+    allOf:
+      - $ref: "#/definitions/newBranch3dModel"
+      - type: object
+      - required:
+          - id
+      - properties:
+          id:
+            type: integer
+  # ***************************

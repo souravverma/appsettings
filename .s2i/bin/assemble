@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "An example of commands run before assembling"
+
+/usr/libexec/s2i/assemble
+rc=$?
+
+if [ $rc -eq 0 ]; then
+    echo "An example of commands run after successful assembling"
+else
+    echo "An example of commands run after failed assembling"
+fi
+
+exit $rc

@@ -1,0 +1,321 @@
+# *******************************************************************
+# PARTZONE PATHS
+# *******************************************************************
+
+paths:
+  /api/v2/functionalItem/harness3dDesignSolutions/mp:
+      get:
+        security:
+          - Bearer: []
+        tags:
+          - 'Part Zone Management'
+        summary: 'Get all the harness design solution for a all functional item + Mp stacks information'
+        responses:
+          '200':
+            description: 'Ok'
+            schema:
+              type: object
+              properties:
+                results:
+                  type: array
+                  items:
+                    allOf:
+                      - $ref: '#/definitions/functionalItemModel'
+                      - type: object
+                        # all other properties
+                        properties:
+                          harness3dDesignSolution:
+                            type: array
+                            items:
+                              allOf:
+                                - $ref: "#/definitions/harness3dDesignSolutionModel"
+                                - type: object
+                                  properties:
+                                    ModificationProposal:
+                                      type: array
+                                      items:
+                                       type: string
+          '404':
+            description: 'Not found'
+            schema:
+              $ref: '#/definitions/errorModel'
+
+  /api/v2/functionalItem/{id}/harness3dDesignSolutions:
+      post:
+        tags:
+          - 'Part Zone Management'
+        summary: 'Create a new Harness 3d design solution'
+        parameters:
+          - name: id
+            in: path
+            description: 'Filter functional item on id'
+            required: true
+            type: integer
+          - in: body
+            name: harness3dDesignSolution
+            schema:
+            allOf:
+              - $ref: '#/definitions/harness3dDesignSolutionModel'
+              - anyOf:
+                  - allOf:
+                      - $ref: '#/definitions/partZoneModel'
+                      -  anyOf:
+                          - $ref: '#/definitions/modificationProposalModel'
+                          - $ref: '#/definitions/functionalItemModel3dSolutionModel'
+                  - $ref: '#/definitions/modificationProposalModel'
+                  - $ref: '#/definitions/functionalItemModel3dSolutionModel'
+        responses:
+          '201':
+            description: operation Created
+          '404':
+            description: 'Not found'
+            schema:
+                  $ref: '#/definitions/errorModel'
+
+  /api/v2/functionalItem/{id}/harness3dDesignSolutions/mp:
+      get:
+        security:
+          - Bearer: []
+        tags:
+          - 'Part Zone Management'
+        summary: 'Get all the harness design solution for a given functional item + Mp stacks information'
+        parameters:
+          - name: id
+            in: path
+            description: 'Filter functional item on id'
+            required: true
+            type: integer
+        responses:
+          '200':
+            description: 'Ok'
+            schema:
+              type: object
+              properties:
+                results:
+                  type: array
+                  items:
+                    allOf:
+                      - $ref: '#/definitions/functionalItemModel'
+                      - type: object
+                        # all other properties
+                        properties:
+                          harness3dDesignSolution:
+                            type: array
+                            items:
+                              allOf:
+                                - $ref: "#/definitions/harness3dDesignSolutionModel"
+                                - type: object
+                                  properties:
+                                    ModificationProposal:
+                                      type: array
+                                      items:
+                                       type: string
+          '404':
+            description: 'Not found'
+            schema:
+              $ref: '#/definitions/errorModel'
+
+  /api/v2/harness3dDesignSolution/{adapDesignSolutionNumber}/partZones:
+      post:
+        tags:
+          - 'Part Zone Management'
+        summary: 'Create a new partzones'
+        parameters:
+          - name: adapDesignSolutionNumber
+            in: path
+            description: 'Filter Harness 3d Design Solutions on adapDesignSolutionNumber'
+            required: true
+            type: integer
+        requestBody:
+          schema:
+            allOf:
+            -  $ref: '#/definitions/partZoneModel'
+            -  type: object
+               properties:
+                  ModificationProposal:
+                    type: array
+                    items:
+                     type: string
+        responses:
+          '201':
+            description: operation Created
+          '404':
+            description: 'Not found'
+            schema:
+              $ref: '#/definitions/errorModel'
+
+  /api/v2/harness3dDesignSolution/{adapDesignSolutionNumber}/partZones/mp-fin:
+      get:
+        security:
+          - Bearer: []
+        tags:
+          - 'Part Zone Management'
+        summary: 'Get all the part zone for a given harness 3d design solution with Mp stacks information and fin sol'
+        parameters:
+          - name: adapDesignSolutionNumber
+            in: path
+            description: 'Filter harness 3d design solution on adapDesignSolutionNumber'
+            required: true
+            type: string
+        responses:
+          '200':
+            description: 'Ok'
+            schema:
+              type: object
+              properties:
+                results:
+                  type: array
+                  items:
+                    allOf:
+                      - $ref: '#/definitions/harness3dDesignSolutionModel'
+                      - type: object
+                        properties:
+                          partZones:
+                            type: array
+                            items:
+                              allOf:
+                                - $ref: '#/definitions/partZoneModel'
+                                - type: object
+                                  properties:
+                                    ModificationProposal:
+                                      type: array
+                                      items:
+                                       type: string
+                                    functionalItem3dSolution:
+                                      type: array
+                                      items:
+                                        allOf:
+                                          - $ref: '#/definitions/functionalItem3dSolutionModel'
+                                    UserArea:
+                                      type: array
+                                      items:
+                                        allOf:
+                                          - $ref: '#/definitions/userAreaModel'
+                                    origin:
+                                      $ref: '#/definitions/partZoneModel'
+                          fin:
+                            type: array
+                            items:
+                              allOf:
+                                - $ref: '#/definitions/functionalItemModel'
+                                - type: object
+                                  properties:
+                                    circuit:
+                                      $ref: '#/definitions/circuitModel'
+          '404':
+            description: 'Not found'
+            schema:
+              $ref: '#/definitions/errorModel'
+
+  /api/v2/partZone/comparative/functionalItem3dSolution:
+      post:
+        security:
+          - Bearer: []
+        tags:
+          - 'Part Zone Management'
+        summary: 'Compare all fin in PZ with a given list'
+        parameters:
+          - in: body
+            name: finList
+            description: 'List of fin needed for the comparatif'
+            schema:
+              $ref: '#/definitions/functionalItemList'
+          - in: query
+            name: VB
+            type: array
+            items:
+              type: number
+            collectionFormat: multi
+        responses:
+          '201':
+            description: operation Created
+            schema:
+              allOf:
+                - type: object
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        allOf: # Combines properties
+                          - $ref: "#/definitions/comparativeFinResponse"
+          '404':
+            description: 'Not found'
+            schema:
+              $ref: '#/definitions/errorModel'
+
+
+# *******************************************************************
+# DEFINITIONS
+# *******************************************************************
+definitions:
+  functionalItemList:
+    type: array
+    items:
+      type: string
+    example:
+      - '1000VC2'
+      - '3550VT_1'
+      - '3550VT_3'
+      - '300BR56_C'
+      - '655VC55'
+  comparativeFinResponse:
+    allOf:
+    - $ref: '#/definitions/partZoneModel'
+    - type: object
+      properties:
+            userArea:
+              type: string
+            Vbs:
+              type: array
+              items:
+                type: string
+            finMatched:
+              type: array
+              items:
+                type: string
+            deltaP:
+              type: array
+              items:
+                type: string
+            nbFinMatched: 
+              type: number
+            nbFinAsked: 
+              type: number
+            purcentageFinMatched: 
+              type: number
+            origin: 
+              type: string
+            date: 
+              type: string
+      example: 
+        - id: 25
+          name: D92S70436000S8
+          partZoneVersion: 002
+          userArea: 'A1'
+          VBs:
+            - '3545VB'
+            - '5000VB'
+          finMatched:
+            - '1000VC2'
+            - '3550VT_1'
+          deltaP:
+            - '3550VT_3'
+            - '300BR56_C'
+            - '655VC55'
+          nbFinMatched: 2
+          purcentageFinMatched: 40
+          origin: new
+          date: 09/01/2020
+        - id: 56
+          name: D92965666000A3
+          partZoneVersion: 001
+          userArea: 'A5'
+          VBs:
+            - '5000VB'
+          finMatched:
+            - '655VC55'
+          deltaP:
+          nbFinMatched: 1
+          purcentageFinMatched: 100
+          origin: new
+          date: 09/01/2020

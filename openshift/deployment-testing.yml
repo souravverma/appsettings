@@ -1,0 +1,154 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: ce-api-harness-testing
+    template: template-nodejs
+  name: ce-api-harness-testing
+  namespace: 1t21-d
+spec:
+  replicas: 1
+  selector:
+    app: ce-api-harness-testing
+    deploymentconfig: ce-api-harness-testing
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ce-api-harness-testing
+        deploymentconfig: ce-api-harness-testing
+      name: ce-api-harness-testing
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: '3000'
+            - name: MS_NAME
+              value: ce-api-harness-testing
+            - name: NEED_SEEDS
+              value: 'false'
+            - name: DB_SCHEMAV2
+              value: coreelec
+            - name: DB_SCHEMAV1
+              value: playground_nis_harness
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: PGHOST
+                  name: aws-postgresql
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PGPORT
+                  name: aws-postgresql
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: postgresql-app-ce-api-harness
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgresql-app-ce-api-harness
+            - name: PGSSLMODE
+              valueFrom:
+                configMapKeyRef:
+                  key: PGSSLMODE
+                  name: aws-postgresql
+            - name: PGSSLROOTCERT
+              valueFrom:
+                configMapKeyRef:
+                  key: PGSSLROOTCERT
+                  name: aws-postgresql
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: PGDATABASE
+                  name: aws-postgresql
+            - name: APS_URL
+              value: 'https://aps-ng-e.eu.airbus.corp'
+            - name: CE_AUTH_URL
+              value: >-
+                https://dev.coreelec.1t21-coreelec.aws.cloud.airbus-v.corp/auth/api/v1/aps/accesstoken
+            - name: SERVICE_MOBILESSO_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: private.key
+                  name: ws-1t21-core-elec-api-harness
+            - name: SERVICE_MOBILESSO_CERTIFICATE
+              valueFrom:
+                secretKeyRef:
+                  key: certificate.pem
+                  name: ws-1t21-core-elec-api-harness
+            - name: SERVICE_MOBILESSO_ID
+              valueFrom:
+                secretKeyRef:
+                  key: name
+                  name: ws-1t21-core-elec-api-harness
+            - name: JWT_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_PUBLIC_KEY
+                  name: ce-auth-jwt-public-key
+          envFrom:
+            - configMapRef:
+                name: authentication
+          image: >-
+            docker-registry.default.svc:5000/1t21-d/ce-api-harness-testing
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v2/status
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          name: ce-api-harness-testing
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v2/status
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: '3'
+              memory: 3Gi
+            requests:
+              cpu: 200m
+              memory: 3Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - imageChangeParams:
+        containerNames:
+          - ce-api-harness-testing
+        from:
+          kind: ImageStreamTag
+          name: 'ce-api-harness-testing:dev'
+          namespace: 1t21-d
+      type: ImageChange
+    - type: ConfigChange
